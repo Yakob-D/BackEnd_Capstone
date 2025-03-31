@@ -29,15 +29,14 @@ class LogoutView(APIView):
     def post(self, request):
         token_key = request.headers.get('Authorization')
         if not token_key:
-            return Response({'error' : 'Token Required'}, status=status.HTTP_400_BAD_REQUEST)
-        if not token_key.startwith('Token'):
-            return Response({'error' : 'Invalid token format'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Token required"}, status=status.HTTP_400_BAD_REQUEST)
+        if not token_key.startswith('Token '):
+            return Response({"error": "Invalid token format"}, status=status.HTTP_400_BAD_REQUEST)
         
         key = token_key.split(' ')[1]
-
         try:
             token = Token.objects.get(key=key)
             token.delete()
-            return Response('message', 'Successfully logged out', status=status.HTTP_200_OK)
+            return Response({"message": "Success"}, status=status.HTTP_200_OK)  # Fixed
         except Token.DoesNotExist:
-            return Response({'error':'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)

@@ -3,8 +3,8 @@ from .views import CreateEventView, ListEventsView, UpdateEventView, DeleteEvent
 
 urlpatterns = [
     #path for GET request to list events
-    path('/', ListEventsView.as_view(), name='event-list'),
     #path for POST request to create an event
+    path('', ListEventsView.as_view(), name='event-list'),
     path('create', CreateEventView.as_view(), name='event-create'),
     #path for PUT request to update an event with an id
     path('update/<int:pk>', UpdateEventView.as_view(), name='event-update'),
