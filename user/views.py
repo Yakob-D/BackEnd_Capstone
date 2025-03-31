@@ -23,4 +23,4 @@ class LoginView(APIView):
             token, created = Token.objects.get_or_create(user=current_user)
             return response({'token':token.key})
         else:
-            raise ValidationError('Invalid Username or Password')
+            raise ValidationError('Invalid Username or Password') 
